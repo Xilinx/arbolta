@@ -1,0 +1,89 @@
+{
+    "modules": {
+      "adder": {
+        "ports": {
+          "op0_i": {"direction": "input", "bits": [ 2, 3, 4, 5 ]},
+          "op1_i": {"direction": "input", "bits": [ 6, 7, 8, 9 ]},
+          "sum_o": {"direction": "output","bits": [ 10, 11, 12, 13, 14 ]}
+        },
+        "cells": {
+          "fa0": {
+            "type": "full_adder",
+            "port_directions": {"carry_i": "input", "carry_o": "output", "op0_i": "input", "op1_i": "input", "sum_o": "output"},
+            "connections":     {"carry_i": [ "0" ], "carry_o": [ 15 ],   "op0_i": [ 2 ],   "op1_i": [ 6 ],   "sum_o": [ 10 ]}
+          },
+          "fa1": {
+            "type": "full_adder",
+            "port_directions": {"carry_i": "input", "carry_o": "output", "op0_i": "input", "op1_i": "input", "sum_o": "output"},
+            "connections":     {"carry_i": [ 15 ],  "carry_o": [ 16 ],   "op0_i": [ 3 ],   "op1_i": [ 7 ],   "sum_o": [ 11 ]}
+          },
+          "fa2": {
+            "type": "full_adder",
+            "port_directions": {"carry_i": "input", "carry_o": "output", "op0_i": "input", "op1_i": "input", "sum_o": "output"},
+            "connections":     {"carry_i": [ 16 ],  "carry_o": [ 17 ],   "op0_i": [ 4 ],   "op1_i": [ 8 ],   "sum_o": [ 12 ]}
+          },
+          "fa3": {
+            "type": "full_adder",
+            "port_directions": {"carry_i": "input", "carry_o": "output", "op0_i": "input", "op1_i": "input", "sum_o": "output"},
+            "connections":     {"carry_i": [ 17 ],  "carry_o": [ 14 ],   "op0_i": [ 5 ],   "op1_i": [ 9 ],   "sum_o": [ 13 ]}
+          }
+        },
+        "netnames": {
+          "fa0_carry": {"bits": [ 15 ]},
+          "fa1_carry": {"bits": [ 16 ]},
+          "fa2_carry": {"bits": [ 17 ]},
+          "op0_i":     {"bits": [ 2, 3, 4, 5 ]},
+          "op1_i":     {"bits": [ 6, 7, 8, 9 ]},
+          "sum_o":     {"bits": [ 10, 11, 12, 13, 14 ]}
+        }
+      },
+      "full_adder": {
+        "ports": {
+          "carry_i": {"direction": "input",  "bits": [ 2 ]},
+          "op0_i":   {"direction": "input",  "bits": [ 3 ]},
+          "op1_i":   {"direction": "input",  "bits": [ 4 ]},
+          "sum_o":   {"direction": "output", "bits": [ 5 ]},
+          "carry_o": {"direction": "output", "bits": [ 6 ]}
+        },
+        "cells": {
+          "$154": {"type": "NOT",  "connections": {"A": [ 4  ],              "Y": [ 7  ]}},
+          "$155": {"type": "NOR",  "connections": {"A": [ 2  ], "B": [ 3  ], "Y": [ 8  ]}},
+          "$156": {"type": "NOT",  "connections": {"A": [ 8  ],              "Y": [ 9  ]}},
+          "$157": {"type": "NAND", "connections": {"A": [ 2  ], "B": [ 3  ], "Y": [ 10 ]}},
+          "$158": {"type": "NOT",  "connections": {"A": [ 10 ],              "Y": [ 11 ]}},
+          "$159": {"type": "NOR",  "connections": {"A": [ 8  ], "B": [ 11 ], "Y": [ 12 ]}},
+          "$160": {"type": "NAND", "connections": {"A": [ 9  ], "B": [ 10 ], "Y": [ 13 ]}},
+          "$161": {"type": "NOR",  "connections": {"A": [ 7  ], "B": [ 13 ], "Y": [ 14 ]}},
+          "$162": {"type": "NAND", "connections": {"A": [ 4  ], "B": [ 12 ], "Y": [ 15 ]}},
+          "$163": {"type": "NOR",  "connections": {"A": [ 4  ], "B": [ 12 ], "Y": [ 16 ]}},
+          "$164": {"type": "NOR",  "connections": {"A": [ 14 ], "B": [ 16 ], "Y": [ 5  ]}},
+          "$165": {"type": "NAND", "connections": {"A": [ 10 ], "B": [ 15 ], "Y": [ 6  ]}}
+        },
+        "netnames": {
+          "$146$new_n6":  {"bits": [ 17 ]},
+          "$146$new_n8":  {"bits": [ 18 ]},
+          "$146$new_n9":  {"bits": [ 19 ]},
+          "$153$carry_i": {"bits": [ 2 ]},
+          "$153$carry_o": {"bits": [ 6 ]},
+          "$153$new_n10": {"bits": [ 11 ]},
+          "$153$new_n11": {"bits": [ 12 ]},
+          "$153$new_n12": {"bits": [ 13 ]},
+          "$153$new_n13": {"bits": [ 14 ]},
+          "$153$new_n14": {"bits": [ 15 ]},
+          "$153$new_n15": {"bits": [ 16 ]},
+          "$153$new_n6":  {"bits": [ 7 ]},
+          "$153$new_n7":  {"bits": [ 8 ]},
+          "$153$new_n8":  {"bits": [ 9 ]},
+          "$153$new_n9":  {"bits": [ 10 ]},
+          "$153$op0_i":   {"bits": [ 3 ]},
+          "$153$op1_i":   {"bits": [ 4 ]},
+          "$153$sum_o":   {"bits": [ 5 ]},
+          "carry_i":      {"bits": [ 2 ]},
+          "carry_o":      {"bits": [ 6 ]},
+          "op0_i":        {"bits": [ 3 ]},
+          "op1_i":        {"bits": [ 4 ]},
+          "sum_o":        {"bits": [ 5 ]}
+        }
+      }
+    }
+  }

@@ -1,0 +1,23 @@
+[project]
+name = "arbolta"
+requires-python = ">=3.8"
+authors = [
+    {name = 'AMD Research & Advanced Development'}
+]
+classifiers = [
+    "Programming Language :: Rust",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Programming Language :: Python :: Implementation :: PyPy",
+]
+dynamic = ["version"]
+
+dependencies = ["numpy>=2.1"]
+
+[build-system]
+requires = ["maturin>=1.7,<2.0"]
+build-backend = "maturin"
+
+[tool.maturin]
+python-source = "py_src"
+module-name = "arbolta.arbolta"
+features = ["pyo3/extension-module"]
