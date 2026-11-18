@@ -213,7 +213,7 @@ inventory::submit! {
   |connections: &BTreeMap<&str, Box<[usize]>>, _parameters: &BTreeMap<&str, usize>| {
     Dff::new(
       Bit::ONE,
-      connections["CLK"][0],
+      connections["C"][0],
       connections["D"][0],
       connections["Q"][0],
     ).into()

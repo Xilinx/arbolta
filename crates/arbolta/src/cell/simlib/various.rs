@@ -10,6 +10,21 @@ use derive_more::Constructor;
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Constructor, Serialize, Deserialize)]
+pub struct ProcBuffer {
+  a_nets: Box<[usize]>,
+  y_nets: Box<[usize]>,
+}
+
+impl CellFn for ProcBuffer {
+  #[inline]
+  fn eval(&mut self, signals: &mut Signals) {
+    copy_nets(signals, &self.a_nets, &self.y_nets);
+  }
+
+  fn reset(&mut self) {}
+}
+
+#[derive(Debug, Clone, Constructor, Serialize, Deserialize)]
 pub struct Pos {
   signed: bool,
   a_nets: Box<[usize]>,
@@ -129,6 +144,22 @@ mod tests {
   use super::*;
   use crate::cell::{simlib::copy_bits, test_helpers::*};
   use rstest::rstest;
+
+  #[rstest]
+  #[case("0", "0")]
+  #[case("1", "1")]
+  #[case("0000", "0000")]
+  #[case("1111", "1111")]
+  #[case("1101", "1101")]
+  #[case("1010", "1010")]
+  #[case("0110", "0110")]
+  #[case("1000", "1000")]
+  #[case("0001", "0001")]
+  #[case("0010110", "0010110")]
+  #[case("11011110", "11011110")]
+  fn buf(#[case] a: BitVec, #[case] expected: BitVec) {
+    run_unary_cell_case!(ProcBuffer, a, expected);
+  }
 
   #[rstest]
   #[case(false, "1101", "001101")]

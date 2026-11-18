@@ -167,6 +167,13 @@ fn make_not(
   .into()
 }
 
+fn make_buffer(
+  connections: &BTreeMap<&str, Box<[usize]>>,
+  _parameters: &BTreeMap<&str, usize>,
+) -> Cell {
+  ProcBuffer::new(connections["A"].clone(), connections["Y"].clone()).into()
+}
+
 fn make_pos(
   connections: &BTreeMap<&str, Box<[usize]>>,
   parameters: &BTreeMap<&str, usize>,
@@ -267,6 +274,7 @@ fn make_pmux(
 }
 
 inventory::submit! {CellRegistration::new(&["$not"], make_not)}
+inventory::submit! {CellRegistration::new(&["$buf"], make_buffer)}
 inventory::submit! {CellRegistration::new(&["$pos"], make_pos)}
 inventory::submit! {CellRegistration::new(&["$dff"], make_dff)}
 inventory::submit! {CellRegistration::new(&["$aldff"], make_aldff)}

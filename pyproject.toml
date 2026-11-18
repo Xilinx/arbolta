@@ -38,6 +38,10 @@ dev = [
 examples = [
     "ipykernel>=7.2.0",
     "jupyter>=1.1.1",
+    "matplotlib>=3.11.2",
+    "polars>=2.1.0",
+    "pyosys",
+    "tqdm>=4.70.1",
 ]
 
 [project.urls]

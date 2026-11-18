@@ -176,6 +176,7 @@ pub enum Cell {
   Mux,
   Not,
   PMux,
+  ProcBuffer,
   Pos,
   ProcAnd,
   ProcOr,
