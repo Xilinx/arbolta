@@ -9,7 +9,6 @@
 </div>
 
 # Arbolta
-
 Arbolta is an experimental framework from the Integrated Communications and AI Lab of AMD Research & Advanced Development that combines a Python interface with a Rust runtime to bridge the gap between hardware and software tools.
 Arbolta is designed to complement hardware-software co-design in situations where it may be more interesting to collect high-level simulation statistics over realistic inputs, than it is to create a timing-accurate waveform.
 Arbolta focuses on the minimal simulation needed to quickly extract high-level insights.
@@ -17,32 +16,17 @@ Our runtime dynamically interprets netlists and provides enough flexibility for 
 
 
 ## Requirements
-
 * Python >= 3.10
-* Linux (only tested w/ Ubuntu)
-* Yosys >= 48.0 - recommended to install via [oss-cad-suite-build](https://github.com/YosysHQ/oss-cad-suite-build)
+* Yosys >= 48.0 (recommended to install via [oss-cad-suite-build](https://github.com/YosysHQ/oss-cad-suite-build))
 * [Rust](https://www.rust-lang.org/tools/install)
 
 ## Getting started
-
-First, ensure you have Rust and Yosys available in your environment. We also recommend using an isolated Python environment for the installation, such as [virtualenv](https://virtualenv.pypa.io/en/latest/).
-
+The easiest way to build and install Arbolta is with [uv](https://docs.astral.sh/uv/).
 ```shell
-source .cargo/env
-export PATH=/path/to/oss/cad/suite/bin:$PATH
-virtualenv -p python3.10 venv
-source venv/bin/activate
-pip install --upgrade pip
+uv add .
 ```
 
-You are now ready to install Arbolta:
-
-```shell
-git clone https://github.com/Xilinx/arbolta.git
-cd arbolta/crates/python_bindings
-pip install .
-```
-Done! You can proceed to [examples](examples/) to follow a basic tutorial to familiarize yourself with Arbolta.
+Done! You can proceed to [examples](examples/) to see different ways to use Arbolta.
 
 ##  Architecture
 Arbolta can be thought of as a [netlist](https://en.wikipedia.org/wiki/Netlist) interpreter that simulates 2-state logic.
