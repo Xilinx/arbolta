@@ -14,39 +14,48 @@ Arbolta is designed to complement hardware-software co-design in situations wher
 Arbolta focuses on the minimal simulation needed to quickly extract high-level insights.
 Our runtime dynamically interprets netlists and provides enough flexibility for effective Python bindings, enabling an interactive simulation model which co-operates with popular machine learning frameworks like [NumPy](https://numpy.org/) and [PyTorch](https://pytorch.org/)!
 
-
 ## Requirements
 * Python >= 3.10
 * Yosys >= 48.0 (recommended to install via [oss-cad-suite-build](https://github.com/YosysHQ/oss-cad-suite-build))
-* [Rust](https://www.rust-lang.org/tools/install)
+* [Rust](https://www.rust-lang.org/tools/install) (if building)
 
 ## Getting started
-The easiest way to build and install Arbolta is with [uv](https://docs.astral.sh/uv/).
+You can install the latest release from PyPi:
 ```shell
-uv add .
+# pip
+pip install arbolta
+
+# uv
+uv add arbolta
+```
+Or you can build and install Arbolta with [uv](https://docs.astral.sh/uv/).
+
+```shell
+uv add https://github.com/KastnerRG/arbolta
 ```
 
 Done! You can proceed to [examples](examples/) to see different ways to use Arbolta.
 
-##  Architecture
+## Architecture
+
 Arbolta can be thought of as a [netlist](https://en.wikipedia.org/wiki/Netlist) interpreter that simulates 2-state logic.
 It takes as input a netlist JSON file exported from [Yosys](https://github.com/YosysHQ/yosys) and constructs a graph representation of the hardware design.
 Our runtime uses pre-compiled functions based on an arbitrary [cell library](https://en.wikipedia.org/wiki/Standard_cell#Library) to dynamically build and interpret dataflow graphs from a hardware netlist.
 
-
 ### Bits and Bit Vectors
 Because we only simulate 2-state logic, we can succinctly express bits with an enum:
+
 ```
 pub enum Bit {
   Zero,
   One,
 }
 ```
+
 Vectors of bits are expressed by the aptly named `BitVec` struct. `BitVec` functions convert different datatypes to bit vectors.
 
 ### Signals
 Signals are a direct proxy to the nets between cells. A signal can be an actual dataflow edge/connection or a constant. Each signal records some statistics, such as its total rising and falling transitions.
-
 
 ### Cells
 Arbolta cells are a direct proxy to standard cells, and model basic logic gates and (synchronous) memories.
@@ -63,18 +72,18 @@ Modules contain a hashmap associating a port name with its corresponding signals
 Designs are a functional wrapper around the simulated top-level module. The `Design` class allows users to specify if a port is a clock or reset input and automatically doing a clocked evaluation of a design.
 
 ## Development
-
 If you plan to make pull requests to the repo, linting will be required. We use a pre-commit hook to auto-format code and check for issues. See https://pre-commit.com/ for installation. Once you have pre-commit, you can install the hooks into your local clone of the repo:
+
 ```shell
 cd arbolta
 source venv/bin/activate
 pip install pre-commit
 pre-commit install
 ```
+
 Every time you commit some code, the pre-commit hooks will first run, performing various checks and fixes. In some cases pre-commit won’t be able to fix the issues and you may have to fix it manually, then run git commit once again. The checks are configured in .pre-commit-config.yaml under the repo root.
 
 ## Running Tests
-
 Run entire test suite, parallelized across CPU cores:
 
 ```shell
@@ -82,12 +91,11 @@ cargo test
 ```
 
 ## Citation
-
 ```bibtex
 @misc{arbolta,
     author = {Redding, Alexander and Colbert, Ian and Umuroglu, Yaman and Petri-Koenig, Jakoba},
     title = {Arbolta: A framework for efficient hardware-software co-design},
     year = {2025},
-    url = {https://github.com/Xilinx/arbolta}
+    url = {https://github.com/KastnerRG/arbolta}
 }
 ```
